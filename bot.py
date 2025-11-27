@@ -266,7 +266,7 @@ def setup_conversation_handler() -> ConversationHandler:
     )
 
 
-async def main():
+def main():
     if not TOKEN:
         logging.error("❌ BOT_TOKEN وجود ندارد، ربات اجرا نمی‌شود.")
         return
@@ -275,11 +275,10 @@ async def main():
     application.add_handler(setup_conversation_handler())
 
     logging.info("✅ ربات با قابلیت ارسال به کانال فعال شد")
-    await application.run_polling(allowed_updates=Update.ALL_TYPES)
+    # این تابع خودش حلقه را مدیریت می‌کند و بلاک می‌ماند
+    application.run_polling(allowed_updates=Update.ALL_TYPES)
 
 
 if __name__ == "__main__":
-    import asyncio
-
-    asyncio.run(main())
+    main()
 
